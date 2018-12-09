@@ -89,18 +89,18 @@
                     <h1>用户登录</h1>
                 </header>
                 <div class="kit-login-main">
-                    <form action="${ctx}/login.php" class="layui-form" method="post">
+                    <form action="${ctx}/api/loginDo.op" class="layui-form" method="post">
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe612;</i>
                             </label>
-                            <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="这里输入用户名." class="layui-input">
+                            <input type="text" name="username" lay-verify="required" autocomplete="off" value="admin"  class="layui-input">
                         </div>
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe642;</i>
                             </label>
-                            <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="这里输入密码." class="layui-input">
+                            <input type="password" name="password" lay-verify="required" autocomplete="off" value="123456"  class="layui-input">
                         </div>
                         <#--<div class="layui-form-item">-->
                             <#--<label class="kit-login-icon">-->

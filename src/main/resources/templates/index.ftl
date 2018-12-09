@@ -13,99 +13,38 @@
 </head>
 
 <body class="kit-theme">
-<div class="layui-layout layui-layout-admin kit-layout-admin">
+<a href="javascript:;"    kit-target="" id="aId1" data-options=""></a>
+<a href="javascript:;"    kit-target="" id="aId2" data-options=""></a>
+<a href="javascript:;"    kit-target="" id="aId3" data-options=""></a>
+
+<div  >
+    <input type="hidden" id="proNameHide" value="${(proName)!}">
+    <input type="hidden" id="leftMenu" value="${(leftMenu)!}" >
+
+    <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">后台管理系统</div>
-        <div class="layui-logo kit-logo-mobile">K</div>
-        <ul class="layui-nav layui-layout-left kit-nav">
-        <#--<li class="layui-nav-item"><a href="javascript:;">控制台</a></li>-->
-            <#--<li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>-->
+        <div class="layui-logo"> <img src="${ctx}/images/xrk.png" onclick="layui.app.dtoOrApi()" class="layui-nav-img" style="width: 50px;height: 50px">后台管理
+        </div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            ${(headMenu)!}
         </ul>
-        <ul class="layui-nav layui-layout-right kit-nav">
+        <ul class="layui-nav layui-layout-right" style="margin-right: 30px">
             <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="layui-icon">&#xe63f;</i> 皮肤
+                <a href="javascript:;" onclick="layui.app.search()">
+                    <img src="${ctx}/images/search.png" alt="搜索" width="26px" >
+                    <span id="proName"   style="color: #009688" ></span>
                 </a>
-                <dl class="layui-nav-child skin">
-                    <dd><a href="javascript:;" data-skin="default" style="color:#393D49;"><i
-                            class="layui-icon">&#xe658;</i> 默认</a></dd>
-                    <dd><a href="javascript:;" data-skin="orange" style="color:#ff6700;"><i
-                            class="layui-icon">&#xe658;</i> 橘子橙</a></dd>
-                    <dd><a href="javascript:;" data-skin="pink" style="color:#FA6086;"><i
-                            class="layui-icon">&#xe658;</i> 少女粉</a></dd>
-                    <dd><a href="javascript:;" data-skin="blue.1" style="color:#00c0ef;"><i
-                            class="layui-icon">&#xe658;</i> 天空蓝</a></dd>
-                    <dd><a href="javascript:;" data-skin="red" style="color:#dd4b39;"><i class="layui-icon">&#xe658;</i>
-                        枫叶红</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="${ctx}/images/6.png" style="width: 32px;height: 32px" class="layui-nav-img"> lsz
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" kit-target
-                           data-options="{url:'basic.html',icon:'&#xe658;',title:'基本资料',id:'966'}"><span>基本资料</span></a>
-                    </dd>
-                    <dd><a href="javascript:;">安全设置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
             </li>
         </ul>
     </div>
 
-    <div class="layui-side layui-bg-black kit-side">
+    <div class="layui-side layui-bg-black kit-side" >
         <div class="layui-side-scroll">
             <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
 
-            <#if menuNodes?? && (menuNodes?size > 0) >
-                <#list menuNodes as menuNode>
-                    <#assign menu=menuNode.menu>
-                    <#assign childNode = menuNode.childNode>
-                        <#if menu?? && menu.type=="2"><!-- 如果1级 并且 是菜单类型 -->
-                    </#if>
-                        <#if menu?? && menu.type=="1"><!-- 如果1级 并且 是目录类型 -->
-                        <li class="layui-nav-item <#if menuNode_index==0> layui-nav-itemed</#if>">
-                            <a class="" href="javascript:;"><i class="layui-icon">&#xe654;</i>   <span> ${menu.menuName}</span></a>
-
-                            <#if childNode?? && (childNode?size > 0)>
-                                <dl class="layui-nav-child">
-                                    <#list childNode as node>
-                                        <#assign childMenu = node.menu>
-                                        <#if childMenu?? && childMenu.status==true && childMenu.type=="2">
-                                            <dd>
-                                                <a href="javascript:;" data-url="${ctx}${childMenu.menuUrl}" data-id='${childMenu.id}'
-                                                   data-title="${childMenu.menuName}" kit-target
-                                                   data-id='2'><i class="layui-icon">&#xe600;</i><span> ${childMenu.menuName}</span></a>
-                                            </dd>
-                                        </#if>
-                                        <#if childMenu??  && childMenu.status==true && childMenu.type=="1">
-                                            <dd><!-- 如果2级 并且 是目录类型 -->
-                                                <div class="main_inav_add_t">
-                                                    <div class="yuan fl"></div>${childMenu.menuName}</div>
-                                                <#assign child2Nodes = node.childNode>
-                                                <#if child2Nodes?? && (child2Nodes?size > 0)>
-                                                    <div class="main_inav_add_d">
-                                                        <#list child2Nodes as child2Node>
-                                                            <#assign child2Menu = child2Node.menu>
-                                                            <#if child2Menu?? && child2Menu.status==true && child2Menu.type=="2">
-
-                                                            </#if>
-                                                        </#list>
-                                                    </div>
-                                                </#if>
-                                            </dd>
-                                        </#if>
-                                    </#list>
-                                </dl>
-                            </#if>
-                        </li>
-                    </#if>
-                </#list>
-            </#if>
 
             </ul>
         </div>
@@ -117,13 +56,14 @@
         </div>
     </div>
 
-
+    </div>
 </div>
 <!-- <script type="text/javascript">
     var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
 </script> -->
 <script src="${ctx}/plugins/layui/layui.js"></script>
+<script src="${ctx}/js/common/common.js"></script>
 <script>
     var message;
     layui.config({
@@ -133,6 +73,8 @@
         var app = layui.app,
                 $ = layui.jquery,
                 layer = layui.layer;
+
+
         //将message设置为全局以便子页面调用
         message = layui.message;
         //主入口
@@ -165,6 +107,18 @@
                 }();
     });
 </script>
+
 </body>
 
 </html>
+<div id="searchFrm" hidden>
+
+    <div style="margin-left: 30px;margin-top: 30px">
+        <h2 align="center">Search</h2>
+    <div style="margin-left: 3px;margin-top: 20px">名称：<input id="txtName" style="height: 26px"></div>
+    <div style="margin-left: 3px;margin-top: 20px">路径：<input id="txtUrl" style="height: 26px"></div>
+        <div style="margin-left: 88px;margin-top: 30px">
+    <input type="button" value="搜 索" class="layui-btn layui-btn-primary"  onclick="layui.app.searchBtn()">
+        </div>
+    </div>
+</div>
